@@ -31,6 +31,5 @@ const input = {
   },
 };
 
-module.exports = JSON.parse(solc.compile(JSON.stringify(input))).contracts[
-  ("Inbox.sol", "Auction.sol")
-];
+const compilation = solc.compile(JSON.stringify(input));
+module.exports = JSON.parse(compilation).contracts;
