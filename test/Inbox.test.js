@@ -2,8 +2,9 @@ const assert = require("assert"); // node standard library for test assertions
 const ganache = require("ganache");
 const Web3 = require("web3"); // make sure to import it capitalized because it's a constructor function / class
 
-// Import ABI / interface and bytecode
-const { abi, evm } = require("../compile");
+// Import ABI / interface and evm / bytecode
+const compiledContracts = require("../compile");
+const inboxContract = compiledContracts["Inbox.sol"].Inbox;
 
 // Now we create an instance of Web3, so it will be with lowercase
 const web3 = new Web3(ganache.provider());
@@ -16,9 +17,9 @@ beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
 
   // Use one of those accounts to deploy a contract
-  inbox = await new web3.eth.Contract(abi)
+  inbox = await new web3.eth.Contract(inboxContract.abi)
     .deploy({
-      data: evm.bytecode.object,
+      data: inboxContract.evm.bytecode.object,
       arguments: ["Hi there!"],
     })
     .send({ from: accounts[0], gas: "1000000" });
