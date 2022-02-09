@@ -34,6 +34,8 @@ contract Auction {
     }
 
     function pickWinner() public managersOnly {
+        // For the purpose of learning, this auction picks a random winner at the moment
+        // So not the bidder with the highest bid
         require(players.length > 0, "No players entered.");
         uint256 winner = random() % players.length;
         (bool success, ) = players[winner].call{value: address(this).balance}(
@@ -55,9 +57,5 @@ contract Auction {
 
     function getPastWinners() public view returns (address[] memory) {
         return pastWinners;
-    }
-
-    function getBalance() public view returns (uint256) {
-        return address(this).balance;
     }
 }
