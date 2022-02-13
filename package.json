@@ -1,14 +1,16 @@
 {
-  "name": "inbox",
+  "name": "simple-blockchain-solidity",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This prototype shows simple contracts created in Solidity that can be compiled, deployed and tested.",
+  "homepage": "https://github.com/jannden/simple-blockchain-solidity",
+  "repository": "https://github.com/jannden/simple-blockchain-solidity",
+  "author": "Jan Cibulka",
+  "license": "ISC",
+  "main": "server.js",
   "scripts": {
     "deploy": "node deploy.js",
     "test": "mocha"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.0.1",
     "dotenv": "^14.3.0",
