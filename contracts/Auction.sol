@@ -5,11 +5,12 @@ pragma solidity ^0.8.9;
 contract Auction {
     address public manager;
     address[] public players;
+    address[] public pastWinners;
     uint256 public priceToEnter;
 
     constructor() {
         manager = msg.sender; // a global object
-        priceToEnter = 1 ether;
+        priceToEnter = 0.01 ether;
     }
 
     function enter() public payable {
@@ -33,12 +34,15 @@ contract Auction {
     }
 
     function pickWinner() public managersOnly {
+        // For the purpose of learning, this auction picks a random winner at the moment
+        // So not the bidder with the highest bid
         require(players.length > 0, "No players entered.");
         uint256 winner = random() % players.length;
         (bool success, ) = players[winner].call{value: address(this).balance}(
             ""
         );
         require(success, "Transfer failed.");
+        pastWinners.push(players[winner]);
         players = new address[](0);
     }
 
@@ -51,7 +55,7 @@ contract Auction {
         return players;
     }
 
-    function getBalance() public view returns (uint256) {
-        return address(this).balance;
+    function getPastWinners() public view returns (address[] memory) {
+        return pastWinners;
     }
 }
