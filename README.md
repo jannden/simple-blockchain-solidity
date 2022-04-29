@@ -1,10 +1,6 @@
 # Blockchain Solidity Contract examples
 
-This prototype:
-
-- Shows simple contracts created in Solidity
-- Contracts are compiled
-- And deployed
+A simple contract created in Solidity which can be tested (Mocha), compiled (Solc), and deployed (hdwallet-provider).
 
 ## How to use
 
